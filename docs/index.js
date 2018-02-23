@@ -45,7 +45,17 @@ function start(){
       });
 
     })
-    // Initialize Firebase
+    
+    draggie.on( 'dragEnd', function( event, pointer ) {
+      console.log(pointer);
+      var parent = pointer.srcElement.parentNode;
+      console.log(parent);
+      var expander = parent.querySelector('.expander');
+      expander.className = "expander pulse";
+      setTimeout(function(){ 
+        expander.className = "expander";
+      }, 500);
+    })
   }
 
   function allDraggers(){
