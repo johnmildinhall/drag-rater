@@ -94,7 +94,6 @@ function start(){
         dragger.style.top = snapshot.val().y+"%";
 
         //animate when other node is placed
-        console.log( snapshot.val().placed )
         if( snapshot.val().placed === true ){
           var expander = dragger.querySelector('.expander');
           expander.className = "expander blueBorder small pulse";
