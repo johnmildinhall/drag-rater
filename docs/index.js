@@ -22,8 +22,8 @@ function start(){
   allDraggers();
 
   function normalise(x,y){
-    var normX = Math.floor((100/window.innerWidth)*x);
-    var normY = Math.floor((100/window.innerHeight)*y);
+    var normX = parseFloat((100/window.innerWidth)*x).toFixed(2);
+    var normY = parseFloat((100/window.innerHeight)*y).toFixed(2);
     return [normX, normY];
   }
 
