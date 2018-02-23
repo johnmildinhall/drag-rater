@@ -51,9 +51,15 @@ function start(){
       var parent = pointer.srcElement.parentNode;
       console.log(parent);
       var expander = parent.querySelector('.expander');
-      expander.className = "expander pulse";
+      expander.className = "expander tomatoBorder large pulse";
+      firebase.database().ref('voting/' + ID).update({
+         "placed" : true
+      });
       setTimeout(function(){ 
-        expander.className = "expander";
+        expander.className = "expander tomatoBorder large";
+        firebase.database().ref('voting/' + ID).update({
+           "placed" : false
+        });
       }, 500);
     })
   }
@@ -83,12 +89,19 @@ function start(){
     //if a node changes
     firebase.database().ref('voting/').on("child_changed", function(snapshot) {
       if(snapshot.key!=ID){
-        // var x = snapshot.val().x;
-        // var y = snapshot.val().y;
-        // var location = denormalise(x, y);
         var dragger = document.querySelector('#'+snapshot.key+'.other');
         dragger.style.left = snapshot.val().x+"%";
         dragger.style.top = snapshot.val().y+"%";
+
+        //animate when other node is placed
+        console.log( snapshot.val().placed )
+        if( snapshot.val().placed === true ){
+          var expander = dragger.querySelector('.expander');
+          expander.className = "expander blueBorder small pulse";
+          setTimeout(function(){ 
+            expander.className = "expander blueBorder small";
+          },500)
+        }
       }
     });
 
