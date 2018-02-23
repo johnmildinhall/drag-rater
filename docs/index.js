@@ -24,6 +24,8 @@ function start(){
   function normalise(x,y){
     var normX = parseFloat((100/window.innerWidth)*x).toFixed(2);
     var normY = parseFloat((100/window.innerHeight)*y).toFixed(2);
+    if (normX < 0){normX = 0};
+    if (normY < 0){normY = 0};
     return [normX, normY];
   }
 
