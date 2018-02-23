@@ -3,7 +3,7 @@ function start(){
   var container = document.querySelector('.container');
   var ID = makeid();
   var draggie = new Draggabilly( elem, {
-    
+    containment: '.container'
   });
   var config = {
     apiKey: "AIzaSyAVpuazHmoypHPGuUge95p9swwL9gsiQtI",
@@ -53,13 +53,13 @@ function start(){
       if(snapshot.key!=ID){
         console.log(snapshot.val());
         // var value = snapshot.val();
-        var x = snapshot.val().x;
-        var y = snapshot.val().y;
-        var location = denormalise(x, y);
+        // var x = snapshot.val().x;
+        // var y = snapshot.val().y;
+        // var location = denormalise(x, y);
         var other = document.querySelector('#proto.other').cloneNode(true);
         other.style.display = "inline";
-        other.style.left = location[0];
-        other.style.top = location[1];
+        other.style.left = snapshot.val().x+"%";
+        other.style.top = snapshot.val().y+"%";
         other.id = snapshot.key;
         container.appendChild(other);         
       }
@@ -71,12 +71,12 @@ function start(){
     //if a node changes
     firebase.database().ref('voting/').on("child_changed", function(snapshot) {
       if(snapshot.key!=ID){
-        var x = snapshot.val().x;
-        var y = snapshot.val().y;
-        var location = denormalise(x, y);
+        // var x = snapshot.val().x;
+        // var y = snapshot.val().y;
+        // var location = denormalise(x, y);
         var dragger = document.querySelector('#'+snapshot.key+'.other');
-        dragger.style.left = location[0];
-        dragger.style.top = location[1];
+        dragger.style.left = snapshot.val().x+"%";
+        dragger.style.top = snapshot.val().y+"%";
       }
     });
 
